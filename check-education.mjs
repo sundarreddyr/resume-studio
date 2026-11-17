@@ -1,0 +1,33 @@
+import assert from 'node:assert/strict';
+import {readFile,writeFile} from 'node:fs/promises';
+import {inlineEducationQualification} from './dist/education.js';
+import {normalizeResume} from './dist/resume-data.js';
+import {createLayout} from './dist/layout.js';
+import {buildPDF} from './dist/pdf.js';
+import {createResumeFile,readResumeFile} from './dist/resume-file.js';
+import {toggleBulletBold,toggleBulletItalic} from './dist/inline-format.js';
+const seed=JSON.parse(await readFile('fixtures/original-seed.json','utf8')),metrics=JSON.parse(await readFile('dist/assets/fonts/metrics.json','utf8'));
+const draft=normalizeResume(seed,seed),ed=draft.sections.find(s=>s.type==='education').items[0],original=ed.qualification;
+const baseline=createLayout(draft,metrics),nodes=baseline.pages.flat();
+assert.ok(nodes.some(n=>n.text===original&&n.font==='CMItalic'),'original inline degree/score row restored');
+assert.ok(!nodes.some(n=>n.text==='CGPA: 8.0'),'no separate score line');
+assert.equal(ed.qualification,seed.sections.find(s=>s.type==='education').items[0].qualification,'old degree unchanged');
+const interim=structuredClone(seed);interim.sections.find(s=>s.type==='education').items[0].score='Percentage: 85%';
+const migrated=normalizeResume(interim,seed),me=migrated.sections.find(s=>s.type==='education').items[0];
+assert.equal(me.qualification,'B.Tech. in ECE — Percentage: 85%');assert.equal(me.score,'Percentage: 85%');assert.equal(me.previousQualification,original);
+assert.deepEqual(normalizeResume(migrated,seed),migrated,'migration is idempotent');
+me.qualification='B.Tech. in ECE — **CGPA: 8.9**';assert.equal(normalizeResume(migrated,seed).sections.find(s=>s.type==='education').items[0].qualification,me.qualification,'manual changes are not overwritten by the old score');
+ed.name='Example _University_';ed.location='**Bengaluru**, IN';ed.qualification='B.Tech. in ECE — **_CGPA: 8.0_**';ed.dates='**_2016–2020_**';
+const layout=createLayout(draft,metrics),formatted=layout.pages.flat();
+for(const [text,font]of [['University','CMItalic'],['Bengaluru','CMBold'],['CGPA: 8.0','CMBoldItalic'],['2016–2020','CMBoldItalic']])assert.equal(formatted.find(n=>n.text===text).font,font);
+const degree=formatted.find(n=>n.text==='B.Tech. in ECE — '),score=formatted.find(n=>n.text==='CGPA: 8.0');assert.equal(degree.y,score.y,'score stays on the degree row');
+let emphasis=toggleBulletBold(original,original.indexOf('CGPA'),original.length);emphasis=toggleBulletItalic(emphasis.text,emphasis.start,emphasis.end);assert.ok(emphasis.text.includes('**_CGPA: 8.0_**'));
+const loadFont=async f=>new Uint8Array(await readFile('dist/assets/fonts/'+f));
+for(const data of [draft,migrated]){
+ const pdf=await buildPDF(createLayout(data,metrics),metrics,loadFont,createResumeFile(data));
+ for(const [format,bytes]of [['pdf',pdf],['json',JSON.stringify(createResumeFile(data))]])assert.deepEqual(normalizeResume(await readResumeFile(new File([bytes],'resume.'+format)),seed),data,format+' retains formatting, new and previous education values');
+ if(data===draft)await writeFile('./tmp/qa/education-inline.pdf',pdf);
+}
+const long=structuredClone(draft);long.sections.find(s=>s.type==='education').items[0].qualification='**_'+Array(600).fill('Academic distinction').join(' ')+'_**';
+for(const n of createLayout(long,metrics).pages.flat())if(n.type==='text')assert.ok(n.y<=756,'long formatted education stays on pages');
+console.log('Education passed: original inline layout, all four formatted fields, bold/italic composition, score recovery without data loss, idempotent migration, manual edits, pagination and PDF/JSON round trips.');

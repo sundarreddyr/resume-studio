@@ -1,0 +1,16 @@
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import {createLayout} from './dist/layout.js';
+import {normalizeResume} from './dist/resume-data.js';
+import {buildPDF} from './dist/pdf.js';
+import {createResumeFile,readResumeFile} from './dist/resume-file.js';
+const read=async p=>JSON.parse(await fs.readFile(p,'utf8'));
+const raw=await read('dist/assets/resume-2026-11-17-corrected.json'),m=await read('dist/assets/fonts/metrics.json'),d=normalizeResume(raw,raw);
+assert.equal(d.personal.location,'Bengaluru, India');assert.equal(d.personal.name,'Sundar Kumar Reddy Rachepalli');
+const l=createLayout(d,m);assert.equal(l.pages.length,2);assert.deepEqual(l.warnings,[]);
+const n=l.pages.flat(),e=n.find(n=>n.text==='Trumetric.AI'),r=n.find(n=>n.text==='Technical Lead'&&n.y===e.y),date=n.find(n=>n.text==='Apr 2026 - Oct 2026');assert.ok(r.x<e.x);assert.equal(date.y,r.y);assert.ok(n.some(n=>n.text===d.personal.location));
+const text=n.map(n=>n.text||'').join(' ').normalize('NFKC');for(const term of ['Retrieval-Augmented Generation (RAG)','Model Context Protocol (MCP)','Bachelor of Technology in Electronics and Communication Engineering','Caffeine','SQLite','Spring Boot','SQLAlchemy'])assert.ok(text.includes(term),term);
+assert.ok(!/Enginerring|Mangement|Caffiene|Sqllite|partioning|Springboot|SqlAlchemy/.test(text));
+const blank=structuredClone(d);blank.sections.find(s=>s.type==='experience').items[0].roles[0].entityName='';const bn=createLayout(blank,m).pages.flat(),br=bn.find(n=>n.text==='Technical Lead');assert.ok(!bn.some(n=>n.text==='Trumetric.AI'));assert.ok(!bn.some(n=>n.text===' - '&&n.y===br.y));
+const bytes=await buildPDF(l,m,async f=>new Uint8Array(await fs.readFile('dist/assets/fonts/'+f)),createResumeFile(d));const round=normalizeResume(await readResumeFile(new File([bytes],'updated.pdf')),d);assert.deepEqual(round,d);
+console.log('Corrected snapshot passed: role-first headers, optional entity, full contact details, expanded terms, spelling, two pages, and lossless PDF round trip.');

@@ -1,0 +1,272 @@
+{
+  "version": 4,
+  "personal": {
+    "name": "Sundar Kumar Reddy Rachepalli",
+    "role": "Technical Lead | Backend systems",
+    "phone": "+91-9148888389",
+    "email": "sundarreddy022@gmail.com",
+    "linkedin": "linkedin.com/in/sundarreddy022",
+    "portfolio": "https://sundarreddyr.github.io/about-me/",
+    "phoneName": "",
+    "emailName": "",
+    "linkedinName": "",
+    "portfolioName": "sundarreddyr.github.io/about-me",
+    "location": "Bengaluru, India"
+  },
+  "layout": {
+    "fontScale": 100,
+    "spacing": 100,
+    "margin": 36
+  },
+  "sections": [
+    {
+      "id": "imported-0",
+      "type": "skills",
+      "title": "Technical Skills",
+      "enabled": true,
+      "pageBreak": false,
+      "items": [
+        {
+          "label": "Frameworks",
+          "value": "Java (Quarkus, Spring Boot), Python (FastAPI), SQL, Dart (Flutter)"
+        },
+        {
+          "label": "Libraries",
+          "value": "Hibernate ORM+JPA, Blaze Persistence, Liquibase, Pandas, SQLAlchemy, Pydantic, Boto3"
+        },
+        {
+          "label": "Databases",
+          "value": "MySQL, ClickHouse, OpenSearch, Oracle SQL"
+        },
+        {
+          "label": "Cloud & DevOps",
+          "value": "AWS(EC2, Cognito, IAM, S3, CloudFront, SNS, SQS, VPC, Bedrock), GitHub CI/CD, Docker Compose, ECR, Postman"
+        },
+        {
+          "label": "Backend",
+          "value": "REST APIs, Data Modeling, DB Optimization & Scaling, Authentication  & Authorization, API gateway, Rate limiter, CDN, Load balancer, VPC & CORS, Multi-tenancy, Event-driven architecture, Concurrency, Caching"
+        },
+        {
+          "label": "Agentic Engineering",
+          "value": "Retrieval-Augmented Generation (RAG), Harness Engineering, Context Management, Spec-driven development, Model Context Protocol (MCP), Codex/Claude Code, AI-assisted Code review"
+        }
+      ]
+    },
+    {
+      "id": "imported-1",
+      "type": "experience",
+      "title": "Experience",
+      "enabled": true,
+      "pageBreak": false,
+      "items": [
+        {
+          "name": "Specbee",
+          "url": "https://www.specbee.com/",
+          "dates": "Apr 2022 - Oct 2026",
+          "location": "Bengaluru, IN",
+          "stack": "",
+          "roles": [
+            {
+              "title": "Technical Lead",
+              "dates": "Apr 2026 - Oct 2026",
+              "entityName": "Trumetric.AI",
+              "entityUrl": "https://www.specbee.com/",
+              "entityDates": "Apr 2026 - Oct 2026",
+              "entityLocation": "Bengaluru, IN",
+              "entityStack": "",
+              "projects": [
+                {
+                  "name": "Trusearch - Enterprise Search for CMS",
+                  "stack": "Java (Quarkus), OpenSearch, Redis, Postgres, SQLite, S3, Cognito, CloudFront, EC2, Docker Compose",
+                  "dates": "",
+                  "bullets": [
+                    {
+                      "text": "Took over [Trusearch](https://www.drupalreleases.com/project/search-api-trusearch)'s agent-first codebase and led a team of 5 to bring it to production readiness, owning architecture, client requirements, deployment decisions, and sprint delivery."
+                    },
+                    {
+                      "text": "**Team Management:** Streamlined feature delivery through sprint planning, architecture guidance and blocker resolution. Aligned developers, QA, and DevOps across testing and deployment. Led client discussions throughout onboarding & go-live."
+                    },
+                    {
+                      "text": "**Harness Engineering**: Tackled agentic bottlenecks like oversized PRs and context loss problems through spec-driven development, PR limits, and persistent repository memory. Automated agent reviews with human-in-the-loop oversight. Mandated walkthroughs & QA checks to validate code quality and developer understanding."
+                    },
+                    {
+                      "text": "**RAG:** Built AI Overview with GPT 5.6-luna to summarize top-k search results with source citations and conversion-focused CTAs. Also evaluated a self-hosted open-weight alternative, Granite 4.1-8B, using vLLM on EC2."
+                    },
+                    {
+                      "text": "**MCP Integration:** Built a tenant-scoped MCP server to let clients query their analytics and search their content daily within the Claude conversation."
+                    },
+                    {
+                      "text": "**Architecture:** Designed a privacy-first architecture with the search engine and indexed content hosted in client infrastructure, alongside a centralized platform for tenants, plans, and usage limits. Led a low-code widget builder serving JS/CSS through S3 + CloudFront for website integration, and guided marketing on Generative Engine Optimization (GEO)."
+                    },
+                    {
+                      "text": "**Search Engineering:** Led one-click integration that indexes ~10000 documents in 3 minutes & initializes widgets to make Search available instantly. Built hybrid retrieval combining BM25, HNSW dense vectors, and neural sparse search, supporting typeahead and suggestions at **p95 <300 ms**. Addressed a 10x latency after reranking through Caffeine L1 caching."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Technical Lead",
+              "dates": "Apr 2025 - Mar 2026",
+              "entityName": "Livine (Poultry ERP)",
+              "entityUrl": "https://www.livine.io/",
+              "entityDates": "Apr 2022 - Mar 2026",
+              "entityLocation": "Bengaluru, IN",
+              "entityStack": "",
+              "projects": [
+                {
+                  "name": "Grower App",
+                  "stack": "Java (Quarkus), Hibernate, Blaze Persistence, Flutter, MySQL, Python (FastAPI), Pandas, SciPy",
+                  "dates": "",
+                  "bullets": [
+                    {
+                      "text": "Owned design and delivery of India's first [Smart Grower App](https://www.livine.io/grower-app) (Flutter+Quarkus) aimed at automating Breeder operations, reducing manual labour and providing real-time analytics & projections."
+                    },
+                    {
+                      "text": "**Client Engagement:** Led the entire process from requirement gathering to on-site implementation, from guiding users to troubleshooting issues and all further client communication & feedback loop."
+                    },
+                    {
+                      "text": "**Data processing:** Phone sits in your pocket and reads values from a scale over BLE protocol & uses **_Sliding-window Standard Deviation_** approach to capture stable weights automatically (~200ms interval). Eliminated the need for a separate person who records weights on paper."
+                    },
+                    {
+                      "text": "**Offline operation & Concurrency:** Designed a fail-proof offline-first weighing to make up for poor farm connectivity and speed up processing **_(~3s per bird)_**. Batch-wise syncing once good connectivity is detected. Enabled 10+ concurrent users to process up to **_50k birds per day_** per farm. "
+                    },
+                    {
+                      "text": "**Predictive Analytics:** Solved a real bottleneck with instant analytics as soon as data is synced, replacing a manual process that took until evening or next day. Built a Gompertz-based growth model using SciPy curve fitting to generate farm-specific weekly body weight targets."
+                    }
+                  ]
+                },
+                {
+                  "name": "Finance Module",
+                  "stack": "Java (Quarkus), Hibernate, Blaze Persistence, MySQL, Cognito, SNS, SQS, AWS Textract, Bedrock",
+                  "dates": "",
+                  "bullets": [
+                    {
+                      "text": "Led a team of 3 to build the ERP’s Accounting module from scratch, owning client requirements, solution design, sprint planning and delivery."
+                    },
+                    {
+                      "text": "**Event-driven:** Integrated the ERP with the accounting module using AWS SNS/SQS to asynchronously consume Purchase/Sale events to generate corresponding Journal entries. Eliminates manual re-entry into another software like Tally."
+                    },
+                    {
+                      "text": "**PDF Extraction:** Built a cost-effective alternative to third-party statement processing software using **_AWS Textract+Claude on Bedrock_**. Automated statement extraction and Payment/Receipt entry creation."
+                    },
+                    {
+                      "text": "**Webhooks:** Designed a pluggable provider **_SPI_** to support payment webhooks, automating Receipt entries from providers like Greenorange, Razorpay etc., with signature verification & idempotency."
+                    },
+                    {
+                      "text": "Led hiring efforts across multiple roles during this time."
+                    },
+                    {
+                      "text": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Software Developer",
+              "dates": "Apr 2022 – Mar 2025",
+              "entityName": "Livine (Poultry ERP)",
+              "entityUrl": "https://www.livine.io/",
+              "entityDates": "Apr 2022 - Mar 2026",
+              "entityLocation": "Bengaluru, IN",
+              "entityStack": "",
+              "projects": [
+                {
+                  "name": "",
+                  "stack": "",
+                  "dates": "",
+                  "bullets": [
+                    {
+                      "text": "**Multi-tenancy:** Solved a painful scaling problem in managing 300+ business reports across multiple clients by building a multi-tenant React + Quarkus platform, enabling client-specific module/category activation and one-click updates across tenants."
+                    },
+                    {
+                      "text": "**OLAP Migration:** Relieved pressure on MySQL by offloading read-heavy reporting to ClickHouse, cutting report latency from _**>1 minute to 2–3 seconds**_ and infrastructure costs by an estimated 40–60%."
+                    },
+                    {
+                      "text": "**DB Performance**: Tried multiple ways to optimize querying with views, pre-aggregated tables with scheduled jobs, partitioning etc. Eventually also came up with a FastAPI Microservice using Pandas for advanced reporting."
+                    },
+                    {
+                      "text": "Built 300+ business reports & dashboards over a span of 1.5 years."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Lumen Technologies",
+          "url": "https://www.lumen.com/en-us/home.html",
+          "dates": "",
+          "location": "Bengaluru, IN",
+          "stack": "",
+          "roles": [
+            {
+              "title": "Software Development Consultant - I",
+              "dates": "Jan 2022 - Mar 2022",
+              "entityName": "",
+              "entityUrl": "",
+              "entityDates": "",
+              "entityLocation": "",
+              "entityStack": "",
+              "projects": [
+                {
+                  "name": "",
+                  "stack": "",
+                  "dates": "",
+                  "bullets": [
+                    {
+                      "text": "Led application modernization by migrating users to Azure B2C for identity management, leveraging Azure IAM and Salesforce Marketing Cloud for all types of customer interactions."
+                    },
+                    {
+                      "text": "Involved in DevOps processes such as building CI/CD pipelines using Jenkins and setting up Splunk to enhance application monitoring & debugging capabilities."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Software Development Engineer (SDE)",
+              "dates": "Sep 2020 – Dec 2021",
+              "entityName": "",
+              "entityUrl": "",
+              "entityDates": "",
+              "entityLocation": "",
+              "entityStack": "",
+              "projects": [
+                {
+                  "name": "",
+                  "stack": "Java (Spring Boot), Oracle SQL, Azure B2C, Kafka, Postman",
+                  "dates": "",
+                  "bullets": [
+                    {
+                      "text": "Developed RESTful services for a Customer Profile Management application using Spring Boot, integrating Kafka messaging and Oracle SQL; APIs were critical in the Authentication & Authorization process of many customer-facing applications."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "imported-3",
+      "type": "education",
+      "title": "Education",
+      "enabled": true,
+      "pageBreak": false,
+      "items": [
+        {
+          "name": "Manipal Institute of Technology",
+          "location": "Manipal, KA",
+          "qualification": "Bachelor of Technology in Electronics and Communication Engineering — **_CGPA: 8.0_**",
+          "score": "CGPA: 8.0",
+          "scoreInQualification": true,
+          "dates": "2016 – 2020"
+        }
+      ]
+    }
+  ]
+}
